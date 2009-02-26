@@ -1,7 +1,7 @@
 package Test::Synopsis;
 use strict;
 use 5.008_001;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use base qw( Exporter );
 our @EXPORT = qw( synopsis_ok all_synopsis_ok );
@@ -9,12 +9,15 @@ our @EXPORT = qw( synopsis_ok all_synopsis_ok );
 use ExtUtils::Manifest qw( maniread );
 
 use Test::Builder;
-my $Test = Test::Builder->new;
+{
+    my $Test = Test::Builder->new;
+    sub tester { $Test }
+}
 
 sub all_synopsis_ok {
     my $manifest = maniread();
     my @files = grep m!^lib/.*\.p(od|m)$!, keys %$manifest;
-    $Test->plan(tests => 1 * @files);
+    tester->plan(tests => 1 * @files);
     synopsis_ok(@files);
 }
 
@@ -22,19 +25,17 @@ sub synopsis_ok {
     my @modules = @_;
 
     for my $module (@modules) {
-        my($code, @option) = extract_synopsis($module);
+        my($code, $line, @option) = extract_synopsis($module);
         unless ($code) {
-            $Test->ok(1, "No SYNOPSIS code");
+            tester->ok(1, "No SYNOPSIS code");
             next;
         }
 
         my $option = join(";", @option);
-        my $test   = "$option; sub { $code }";
-        if (_compile($test)) {
-            $Test->ok(1, $module);
-        } else {
-            $Test->ok(0, $@);
-        }
+        my $test   = qq(#line $line "$module"\n$option; sub { $code });
+        my $ok     = _compile($test);
+        tester->ok($ok, $module);
+        tester->diag($@) unless $ok;
     }
 }
 
@@ -53,8 +54,10 @@ sub extract_synopsis {
         <$fh>;
     };
 
-    return ($content =~ m/^=head1\s+SYNOPSIS(.+?)^=head1/ms)[0],
-           ($content =~ m/^=for\s+test_synopsis\s+(.+?)^=/msg);
+    my $code = ($content =~ m/^=head1\s+SYNOPSIS(.+?)^=head1/ms)[0];
+    my $line = $` =~ tr/\n/\n/;
+
+    return $code, $line-1, ($content =~ m/^=for\s+test_synopsis\s+(.+?)^=/msg);
 }
 
 1;
