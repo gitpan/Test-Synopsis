@@ -1,7 +1,7 @@
 package Test::Synopsis;
 use strict;
 use 5.008_001;
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use base qw( Exporter );
 our @EXPORT = qw( synopsis_ok all_synopsis_ok );
@@ -77,13 +77,13 @@ Test::Synopsis - Test your SYNOPSIS code
 
   # xt/synopsis.t (with Module::Install::AuthorTests)
   use Test::Synopsis;
-  all_synopsis_ok("lib");
+  all_synopsis_ok();
 
   # Or, run safe without Test::Synopsis
   use Test::More;
   eval "use Test::Synopsis";
   plan skip_all => "Test::Synopsis required for testing" if $@;
-  all_synopsis_ok("lib");
+  all_synopsis_ok();
 
 =head1 DESCRIPTION
 
