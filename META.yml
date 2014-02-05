@@ -20,11 +20,11 @@ name: Test-Synopsis
 provides:
   Test::Synopsis:
     file: lib/Test/Synopsis.pm
-    version: 0.07
+    version: 0.08
 requires:
   ExtUtils::Manifest: 0
   Pod::Parser: 0
-  Test::Builder::Module: 0
+  Test::Builder::Module: 1.001002
   base: 0
   perl: 5.008_001
   strict: 0
@@ -33,7 +33,7 @@ resources:
   bugtracker: https://github.com/miyagawa/test-synopsis/issues
   homepage: http://metacpan.org/release/Test-Synopsis
   repository: git://github.com/miyagawa/test-synopsis.git
-version: 0.07
+version: 0.08
 x_Dist_Zilla:
   perl:
     version: 5.014002
@@ -58,7 +58,7 @@ x_Dist_Zilla:
             - IPC::Open3
             - File::Copy
       name: '@Author::ZOFFIX/PromptIfStale'
-      version: 0.016
+      version: 0.015
     -
       class: Dist::Zilla::Plugin::GatherDir
       name: '@Author::ZOFFIX/GatherDir'
@@ -129,7 +129,7 @@ x_Dist_Zilla:
           inherit_version: 1
           meta_noindex: 1
       name: '@Author::ZOFFIX/MetaProvides::Package'
-      version: 2.000000
+      version: 1.15000003
     -
       class: Dist::Zilla::Plugin::GithubMeta
       name: '@Author::ZOFFIX/GithubMeta'
@@ -252,20 +252,16 @@ x_Dist_Zilla:
       name: '@Author::ZOFFIX/ConfirmRelease'
       version: 5.012
     -
-      class: Dist::Zilla::Plugin::Git::Check
-      name: '@Author::ZOFFIX/Git::Check'
-      version: 2.020
-    -
-      class: Dist::Zilla::Plugin::Git::Commit
-      name: '@Author::ZOFFIX/Git::Commit'
-      version: 2.020
-    -
-      class: Dist::Zilla::Plugin::Git::Push
-      name: '@Author::ZOFFIX/Git::Push'
-      version: 2.020
-    -
       class: Dist::Zilla::Plugin::UploadToCPAN
       name: '@Author::ZOFFIX/UploadToCPAN'
+      version: 5.012
+    -
+      class: Dist::Zilla::Plugin::Prereqs
+      config:
+        Dist::Zilla::Plugin::Prereqs:
+          phase: runtime
+          type: requires
+      name: Prereqs
       version: 5.012
     -
       class: Dist::Zilla::Plugin::AutoMetaResources
@@ -274,11 +270,23 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Git::NextVersion
       name: Git::NextVersion
-      version: 2.020
+      version: 2.019
     -
       class: Dist::Zilla::Plugin::Git::Tag
       name: Git::Tag
-      version: 2.020
+      version: 2.019
+    -
+      class: Dist::Zilla::Plugin::Git::Check
+      name: Git::Check
+      version: 2.019
+    -
+      class: Dist::Zilla::Plugin::Git::Commit
+      name: Git::Commit
+      version: 2.019
+    -
+      class: Dist::Zilla::Plugin::Git::Push
+      name: Git::Push
+      version: 2.019
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'

@@ -20,6 +20,8 @@ t/07-nopod.t
 t/08-plain-text-in-pod.t
 t/09-synopsis.t
 t/10-in-pod-skip.t
+t/11-DATA-in-pod.t
+t/12-DATA-token-errors.t
 t/lib/BrokenSYNOPSIS01.pm
 t/lib/ENDInPod.pm
 t/lib/ENDInPodWithError.pm
@@ -30,6 +32,8 @@ t/lib/Test03Other.pm
 t/lib/Test04HEREDOC.pm
 t/lib/Test10HEREDOC.pm
 t/lib/Test10InPodSkipWithBegin.pm
+t/lib/Test11DATAInPod.pm
+t/lib/Test12DATAInPodWithError.pm
 xt/author/pod-spell.t
 xt/author/test-eol.t
 xt/release/cpan-changes.t

@@ -23,7 +23,7 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "ExtUtils::Manifest" => 0,
     "Pod::Parser" => 0,
-    "Test::Builder::Module" => 0,
+    "Test::Builder::Module" => "1.001002",
     "base" => 0,
     "strict" => 0,
     "warnings" => 0
@@ -35,7 +35,7 @@ my %WriteMakefileArgs = (
     "Test::Builder::Tester" => 0,
     "Test::More" => 0
   },
-  "VERSION" => "0.07",
+  "VERSION" => "0.08",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -48,7 +48,7 @@ my %FallbackPrereqs = (
   "IO::Handle" => 0,
   "IPC::Open3" => 0,
   "Pod::Parser" => 0,
-  "Test::Builder::Module" => 0,
+  "Test::Builder::Module" => "1.001002",
   "Test::Builder::Tester" => 0,
   "Test::More" => 0,
   "base" => 0,
