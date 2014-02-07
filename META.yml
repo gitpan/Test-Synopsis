@@ -21,7 +21,7 @@ name: Test-Synopsis
 provides:
   Test::Synopsis:
     file: lib/Test/Synopsis.pm
-    version: 0.09
+    version: 0.10
 requires:
   ExtUtils::Manifest: 0
   Pod::Parser: 0
@@ -34,7 +34,7 @@ resources:
   bugtracker: https://github.com/miyagawa/test-synopsis/issues
   homepage: http://metacpan.org/release/Test-Synopsis
   repository: git://github.com/miyagawa/test-synopsis.git
-version: 0.09
+version: 0.10
 x_Dist_Zilla:
   perl:
     version: 5.014002
@@ -277,6 +277,10 @@ x_Dist_Zilla:
       name: AutoMetaResources
       version: 1.20
     -
+      class: Dist::Zilla::Plugin::Meta::Contributors
+      name: Meta::Contributors
+      version: 0.001
+    -
       class: Dist::Zilla::Plugin::Git::NextVersion
       name: Git::NextVersion
       version: 2.020
@@ -337,3 +341,8 @@ x_Dist_Zilla:
     config:
       is_trial: 0
     version: 5.012
+x_contributors:
+  - 'Kevin Ryde <kryde@cpan.org>'
+  - 'Marcel Grünauer <marcel@cpan.org>'
+  - 'Mike Doherty <doherty@cpan.org>'
+  - 'Zoffix Znet <zoffix@cpan.org>'
