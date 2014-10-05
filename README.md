@@ -32,10 +32,10 @@ Suppose you have the following POD in your module.
 
     =head1 SYNOPSIS
 
-    use Awesome::Template;
+      use Awesome::Template;
 
-    my $template = Awesome::Template->new;
-    $tempalte->render("template.at");
+      my $template = Awesome::Template->new;
+      $tempalte->render("template.at");
 
     =head1 DESCRIPTION
 
@@ -51,8 +51,8 @@ synopsis, like:
 
     =head1 SYNOPSIS
 
-    use Data::Dumper::Names;
-    print Dumper($scalar, \@array, \%hash);
+      use Data::Dumper::Names;
+      print Dumper($scalar, \@array, \%hash);
 
 This assumes these variables like _$scalar_ are defined elsewhere in
 module user's code, but Test::Synopsis, by default, will complain that
@@ -89,7 +89,7 @@ will be skipped for that document.
 
     =for test_synopsis BEGIN { die "SKIP: skip this pod, it's horrible!\n"; }
 
-      $x; # undeclared variable, but we skipped the test!
+        $x; # undeclared variable, but we skipped the test!
 
     =end
 
@@ -144,6 +144,14 @@ you specify in the `BEGIN {}` blocks in the SYNOPSIS.
 If you're using HEREDOCs in your SYNOPSIS, you will need to place
 the ending of the HEREDOC at the same indent as the
 first line of the code of your SYNOPSIS.
+
+The code from multiple files will be executed under the same perl process,
+so it's possible to run into issues such as, say, sub redefinition
+warnings. Currently, there's no plan to fix this, but patches are welcome.
+Redefinition warnings can be turned off with
+
+    =for test_synopsis
+    no warnings 'redefine';
 
 # REPOSITORY
 
